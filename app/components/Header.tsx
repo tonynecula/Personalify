@@ -292,6 +292,7 @@ const $actionIconContainer: ViewStyle = {
   height: "100%",
   paddingHorizontal: spacing.md,
   zIndex: 2,
+  borderRadius: 30,
 }
 
 const $actionFillerContainer: ViewStyle = {

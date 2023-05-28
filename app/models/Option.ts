@@ -4,9 +4,8 @@ import { withSetPropAction } from "./helpers/withSetPropAction"
 export const OptionModel = types
   .model("Option")
   .props({
-    id: types.identifier,
-    label: types.string,
-    score: types.number,
+    text: types.string,
+    value: types.number,
   })
   .actions(withSetPropAction)
   .views(() => ({}))

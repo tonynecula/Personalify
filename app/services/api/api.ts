@@ -1,38 +1,18 @@
-/**
- * This Api class lets you define an API endpoint and methods to request
- * data and process it.
- *
- * See the [Backend API Integration](https://github.com/infinitered/ignite/blob/master/docs/Backend-API-Integration.md)
- * documentation for more details.
- */
-import {
-  ApisauceInstance,
-  create,
-} from "apisauce"
+import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import Config from "../../config"
-import type {
-  ApiConfig,
-} from "./api.types"
+import { ApiConfig } from "./api.types"
+import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
+import { Quiz } from "app/models"
 
-/**
- * Configuring the apisauce instance.
- */
 export const DEFAULT_API_CONFIG: ApiConfig = {
   url: Config.API_URL,
   timeout: 10000,
 }
 
-/**
- * Manages all requests to the API. You can use this class to build out
- * various requests that you need to call from your backend API.
- */
 export class Api {
   apisauce: ApisauceInstance
   config: ApiConfig
 
-  /**
-   * Set up our API instance. Keep this lightweight!
-   */
   constructor(config: ApiConfig = DEFAULT_API_CONFIG) {
     this.config = config
     this.apisauce = create({
@@ -44,6 +24,41 @@ export class Api {
     })
   }
 
+  async getQuestions(): Promise<{ kind: "ok"; quiz: any } | GeneralApiProblem> {
+    console.log("arrived api")
+    const response: ApiResponse<any> = await this.apisauce.get("/quiz")
+    console.log()
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    try {
+      const rawData = response.data
+
+      const quiz = rawData.data[0]
+
+      return { kind: "ok", quiz }
+    } catch (e) {
+      return { kind: "bad-data" }
+    }
+  }
+
+  async updateQuiz(quiz: any): Promise<{ kind: "ok"; data: Quiz } | GeneralApiProblem> {
+    const response: ApiResponse<any> = await this.apisauce.put("/quiz/getResult", quiz)
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    try {
+      const data = response.data
+      return { kind: "ok", data }
+    } catch (e) {
+      return { kind: "bad-data" }
+    }
+  }
 }
 
 // Singleton instance of the API for convenience

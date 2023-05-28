@@ -9,7 +9,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",
     "splash": {
-      "image": "./assets/images/splash-logo-all.png",
+      "image": "./assets/images/coolBackground.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,9 +17,7 @@
       "fallbackToCacheTimeout": 0
     },
     "jsEngine": "hermes",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.personalify",
@@ -28,7 +26,7 @@
         "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
       },
       "splash": {
-        "image": "./assets/images/splash-logo-android-universal.png",
+        "image": "./assets/images/coolBackground.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       }
@@ -38,8 +36,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.personalify",
       "splash": {
-        "image": "./assets/images/splash-logo-ios-mobile.png",
-        "tabletImage": "./assets/images/splash-logo-ios-tablet.png",
+        "image": "./assets/images/coolBackground.png",
+        "tabletImage": "./assets/images/coolBackground.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       }
@@ -47,13 +45,11 @@
     "web": {
       "favicon": "./assets/images/app-icon-web-favicon.png",
       "splash": {
-        "image": "./assets/images/splash-logo-web.png",
+        "image": "./assets/images/coolBackground.png",
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       }
     },
-    "plugins": [
-      "expo-localization"
-    ]
+    "plugins": ["expo-localization"]
   }
 }

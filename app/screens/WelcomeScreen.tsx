@@ -10,7 +10,9 @@ const logo = require("../../assets/images/personalify.png")
 
 interface WelcomeScreenProps extends AppStackScreenProps<"Welcome"> {}
 
-export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeScreen() {
+export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeScreen({
+  navigation,
+}) {
   const $bottomContainerInsets = useSafeAreaInsetsStyle(["bottom"])
 
   return (
@@ -27,8 +29,12 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
       </View>
 
       <View style={[$bottomContainer, $bottomContainerInsets]}>
-        <Text tx="welcomeScreen.postscript" size="md" />
-        <Button tx="welcomeScreen.start" style={$startButton} />
+        <Text tx="welcomeScreen.postscript" size="md" style={$postscript} />
+        <Button
+          tx="welcomeScreen.start"
+          style={$startButton}
+          onPress={() => navigation.navigate("Question")}
+        />
       </View>
     </View>
   )
@@ -42,7 +48,7 @@ const $container: ViewStyle = {
 const $topContainer: ViewStyle = {
   flexShrink: 1,
   flexGrow: 1,
-  flexBasis: "70%",
+  flexBasis: "60%",
   justifyContent: "center",
   paddingHorizontal: spacing.lg,
 }
@@ -50,7 +56,7 @@ const $topContainer: ViewStyle = {
 const $bottomContainer: ViewStyle = {
   flexShrink: 1,
   flexGrow: 0,
-  flexBasis: "43%",
+  flexBasis: "50%",
   backgroundColor: colors.palette.neutral100,
   borderTopLeftRadius: 16,
   borderTopRightRadius: 16,
@@ -65,6 +71,9 @@ const $welcomeLogo: ImageStyle = {
 
 const $welcomeHeading: TextStyle = {
   marginBottom: spacing.md,
+}
+const $postscript: TextStyle = {
+  marginTop: spacing.md,
 }
 const $startButton: TextStyle = {
   backgroundColor: colors.palette.primary300,

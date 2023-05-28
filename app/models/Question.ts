@@ -5,9 +5,9 @@ import { OptionModel } from "./Option"
 export const QuestionModel = types
   .model("Question")
   .props({
-    id: types.identifier,
-    questionText: types.string,
-    options: types.array(OptionModel),
+    question: types.string,
+    choices: types.array(OptionModel),
+    selectedAnswer: types.maybe(types.number),
   })
   .actions(withSetPropAction)
   .views(() => ({}))
